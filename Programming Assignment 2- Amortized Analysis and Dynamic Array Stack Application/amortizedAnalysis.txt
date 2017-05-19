@@ -1,0 +1,125 @@
+CS261- Assignment 2 - amortizedAnalysis.txt
+Name: Stephen Townsend
+Date: 1/29/17
+
+Amortize Analysis
+
+1)
+				unit	count	multiple
+push 8 elements			8	8
+push 1 element/resize 16 	9	9
+push 1 element			10	1	-
+push 1 element			11	1	|
+push 1 element			12	1	|
+push 1 element			13	1	7
+push 1 element			14	1	|
+push 1 element			15	1	|
+push 1 element			16	1	-
+push 1 element/resize 32 	17	17
+push 1 element			18	1	-
+push 1 element			19	1	|
+push 1 element			20	1	|
+push 1 element			21	1	|
+push 1 element			22	1	|
+push 1 element			23	1	|
+push 1 element			24	1	|
+push 1 element			25	1	15
+push 1 element			26	1	|
+push 1 element			27	1	|
+push 1 element			28	1	|
+push 1 element			29	1	|
+push 1 element			30	1	|
+push 1 element			31	1	|
+push 1 element			32	1	-
+--------------------------------------------------
+Cost 8 + 9 + 7 + 17 + 15
+Total cost = 56 units spent
+
+O(1) complexity as n grows large
+
+2)
+				unit	count	multiple
+push 8 elements			8	8
+push 1 element/resize 10	9	9		
+push 1 element			10		1	-	
+push 1 element/resize 12	11	11		
+push 1 element			12		1	|
+push 1 element/resize 14	13	13		
+push 1 element			14		1	|
+push 1 element/resize 16	15	15		
+push 1 element			16		1	|
+push 1 element/resize 18	17	17	
+push 1 element			18		1	|
+push 1 element/resize 20	19	19		
+push 1 element			20		1	12
+push 1 element/resize 22	21	21		
+push 1 element			22		1	|
+push 1 element/resize 24	23	23		
+push 1 element			24		1	|
+push 1 element/resize 26	25	25		
+push 1 element			26		1	|
+push 1 element/resize 28	27	27		
+push 1 element			28		1	|
+push 1 element/resize 30	29	29		
+push 1 element			30		1	|
+push 1 element/resize 32	31	31		
+push 1 element			32		1	-
+--------------------------------------------------
+Cost 8+9+11+13+15+17+19+21+23+25+27+29+31+12
+Total cost = 260 units spent
+
+O(n^2) complexity as n grows large
+
+
+3)
+Shrinking N/2
+
+initial size = 2;  inital capacity = 4
+
+--push()
+
+Array size 3; 	Array capacity 4; 	Cost unit = 1;
+
+--pop()
+
+Array size 2;	Array capacity 2;	Cost unit = 3;
+
+--push()
+
+Array size 3;	Array capacity 4;	Cost unit = 3;
+
+--pop()
+
+Array size 2;	Array capacity 2; 	Cost unit = 3;
+
+Total Cost = 10
+
+
+How might you adjust the array's shrinking policy to avoid this?
+
+To avoid unnecessary shrinking, I would think that changing the 
+shrinking policy from N/2 to anything from N/4 or less.  By having 
+the array shrink when the size is 1/4th the capacity will allow for 
+growth that may be more benifical.
+
+Shrinking N/4
+
+initial size = 3;  inital capacity = 4
+
+--push()
+
+Array size 4; 	Array capacity 8; 	Cost unit = 5;
+
+--pop()
+
+Array size 3;	Array capacity 8;	Cost unit = 1;
+
+--push()
+
+Array size 4;	Array capacity 8;	Cost unit = 1;
+
+--pop()
+
+Array size 5;	Array capacity 8; 	Cost unit = 1;
+
+Total Cost = 8
