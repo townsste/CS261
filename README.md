@@ -1,2 +1,2 @@
 # CS261
-Data Structures in C
+DATA STRUCTURES in C
